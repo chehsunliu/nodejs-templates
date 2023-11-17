@@ -23,5 +23,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Test
-        run: docker-compose version
+      - name: Check code format
+        run: npm run fmt-check
+
+      - name: Run the unit tests
+        run: npm run test:unit
+
+      - name: Start the DynamoDB
+        run: docker-compose up -d
+
+      - name: Run the AWS integration tests
+        run: npm run test:aws
+
+      - name: Stop the DynamoDB
+        run: docker-compose down --remove-orphans --timeout 10 || true
