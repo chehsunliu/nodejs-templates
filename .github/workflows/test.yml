@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-multicloud-nosql:
+  multicloud-nosql--build:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -29,6 +29,24 @@ jobs:
       - name: Run the unit tests
         run: npm run test:unit
 
+      - name: Build
+        run: npm run build
+
+  multicloud-nosql--aws-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./multicloud-nosql
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Start the DynamoDB
         run: docker-compose up -d dynamodb
 
@@ -38,15 +56,36 @@ jobs:
       - name: Stop the DynamoDB
         run: docker-compose down --remove-orphans --timeout 10 || true
 
+      - name: Show container logs anyway
+        if: always()
+        run: docker-compose logs
+
+  multicloud-nosql--azure-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./multicloud-nosql
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Start the Cosmos DB
         run: docker-compose -f docker-compose.azure.yml up -d cosmosdb
 
       - name: Run the Azure integration tests
         run: npm run test:azure
 
-      - name: Show container logs anyway
-        if: always()
-        run: docker-compose -f docker-compose.azure.yml logs
-
       - name: Stop the Cosmos DB
         run: docker-compose down --remove-orphans --timeout 10 || true
+
+      - name: Show container logs anyway
+        if: always()
+        run: |
+          # https://github.com/Azure/azure-cosmos-db-emulator-docker/issues/56
+          docker-compose -f docker-compose.azure.yml logs
