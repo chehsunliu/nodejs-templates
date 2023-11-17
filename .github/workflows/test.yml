@@ -30,10 +30,22 @@ jobs:
         run: npm run test:unit
 
       - name: Start the DynamoDB
-        run: docker-compose up -d
+        run: docker-compose up -d dynamodb
 
       - name: Run the AWS integration tests
         run: npm run test:aws
 
       - name: Stop the DynamoDB
+        run: docker-compose down --remove-orphans --timeout 10 || true
+
+      - name: Start the Cosmos DB
+        run: docker-compose -f docker-compose.azure.yml up -d cosmosdb
+
+      - name: Wait until the db ready
+        run: ( docker-compose -f docker-compose.azure.yml logs -f ) | grep -q 'Started 2/2 partitions'
+
+      - name: Run the Azure integration tests
+        run: npm run test:azure
+
+      - name: Stop the Cosmos DB
         run: docker-compose down --remove-orphans --timeout 10 || true
