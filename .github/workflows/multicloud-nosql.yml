@@ -1,4 +1,4 @@
-name: Test
+name: Multicloud NoSQL
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  multicloud-nosql--build:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: npm run build
 
-  multicloud-nosql--aws-test:
+  aws-test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -60,7 +60,7 @@ jobs:
         if: always()
         run: docker-compose logs
 
-  multicloud-nosql--azure-test:
+  azure-test:
     runs-on: ubuntu-latest
     defaults:
       run:
