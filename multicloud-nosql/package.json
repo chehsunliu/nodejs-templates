@@ -5,9 +5,12 @@
   "main": "main.js",
   "scripts": {
     "build": "node build.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "fmt": "prettier -w ./src ./test *.mjs",
-    "fmt-check": "prettier -c ./src ./test *.mjs"
+    "test": "jest --config jest.config.cjs --runInBand --verbose",
+    "test:unit": "jest --config jest.unit.config.cjs --verbose",
+    "test:aws": "jest --config jest.aws.config.cjs --runInBand --verbose",
+    "test:azure": "jest --config jest.azure.config.cjs --runInBand --verbose",
+    "fmt": "prettier -w ./src integration-test *.mjs *.cjs",
+    "fmt-check": "prettier -c ./src integration-test *.mjs *.cjs"
   },
   "author": "Che-Hsun Liu",
   "license": "MIT",
