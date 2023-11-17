@@ -42,7 +42,7 @@ jobs:
         run: docker-compose -f docker-compose.azure.yml up -d cosmosdb
 
       - name: Wait until the db ready
-        run: ( docker-compose -f docker-compose.azure.yml logs -f ) | grep -q 'Started 2/2 partitions'
+        run: ( docker-compose -f docker-compose.azure.yml logs -f & ) | grep -q 'Started 2/2 partitions'
 
       - name: Run the Azure integration tests
         run: npm run test:azure
