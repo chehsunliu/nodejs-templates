@@ -1,3 +1,8 @@
+export enum Profile {
+  AWS_TEST = "aws-test",
+  AZURE_TEST = "azure-test",
+}
+
 export type Config = {
   profile?: string;
   aws: {
@@ -23,7 +28,7 @@ let config: Config | undefined;
 
 const create = (): Config => {
   return {
-    profile: process.env.DEMO_PROFILE,
+    profile: process.env["DEMO_PROFILE"],
     aws: {
       test: {
         endpoint: process.env["DEMO_AWS_TEST_ENDPOINT"],

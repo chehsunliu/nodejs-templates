@@ -4,7 +4,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 let client: DynamoDBClient | undefined;
 
 const create = (config: Config.Config): DynamoDBClient => {
-  if (config.profile === "aws-test") {
+  if (config.profile === Config.Profile.AWS_TEST) {
     return new DynamoDBClient({
       endpoint: config.aws.test.endpoint!,
       region: config.aws.test.region!,

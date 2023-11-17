@@ -5,7 +5,7 @@ import https from "https";
 let client: CosmosClient | undefined;
 
 const create = (config: Config.Config): CosmosClient => {
-  if (config.profile === "azure-test") {
+  if (config.profile === Config.Profile.AZURE_TEST) {
     return new CosmosClient({
       endpoint: config.azure.test.endpoint!,
       key: config.azure.test.key!,
