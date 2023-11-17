@@ -44,5 +44,9 @@ jobs:
       - name: Run the Azure integration tests
         run: npm run test:azure
 
+      - name: Show container logs anyway
+        if: always()
+        run: docker-compose -f docker-compose.azure.yml logs
+
       - name: Stop the Cosmos DB
         run: docker-compose down --remove-orphans --timeout 10 || true
