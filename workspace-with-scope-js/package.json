@@ -12,5 +12,8 @@
     "pkgs/demo-app",
     "pkgs/demo-lib1",
     "pkgs/demo-lib2"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^3.1.1"
+  }
 }
