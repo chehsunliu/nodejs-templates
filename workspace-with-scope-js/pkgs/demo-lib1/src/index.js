@@ -5,6 +5,10 @@ export class Calculator {
     this.calculator = new lib2.Calculator();
   }
 
+  /**
+   * @param {number} n
+   * @returns {boolean}
+   */
   isEven(n) {
     return !this.calculator.isOdd(n);
   }
