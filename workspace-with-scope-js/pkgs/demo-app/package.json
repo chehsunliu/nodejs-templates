@@ -1,6 +1,8 @@
 {
   "name": "@chehsunliu/demo-app",
   "type": "module",
+  "private": true,
+  "version": "1.0.0",
   "main": "src/app.js",
   "dependencies": {
     "@chehsunliu/demo-lib1": "*"

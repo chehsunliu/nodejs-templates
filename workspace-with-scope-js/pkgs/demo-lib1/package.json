@@ -1,6 +1,7 @@
 {
   "name": "@chehsunliu/demo-lib1",
   "type": "module",
+  "version": "1.0.0",
   "main": "src/index.js",
   "dependencies": {
     "@chehsunliu/demo-lib2": "*"
