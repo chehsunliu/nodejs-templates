@@ -1,4 +1,7 @@
 {
   "name": "@chehsunliu/demo-app",
-  "main": "src/app.js"
+  "main": "src/app.js",
+  "dependencies": {
+    "@chehsunliu/demo-lib1": "*"
+  }
 }
