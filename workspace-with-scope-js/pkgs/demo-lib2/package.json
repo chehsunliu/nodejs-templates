@@ -1,4 +1,5 @@
 {
   "name": "@chehsunliu/demo-lib2",
+  "type": "module",
   "main": "src/index.js"
 }
